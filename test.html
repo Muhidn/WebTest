@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image</title>
+    <style>
+        .error {
+            color: red;
+        }
+        table {
+            width: 100%;
+        }
+        td {
+            width: 50%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Display</h1>
+    <label for="nImages">Enter number of images to display:</label>
+    <input type="text" id="nImages" value="4">
+    <button onclick="displayTable()">Display Images</button>
+
+    <h2>Images</h2>
+    <div id="message" class="error"></div>
+    <div id="imageContainer"></div>
+
+    <script>
+        function displayTable() {
+            const nImages = parseInt(document.getElementById('nImages').value);
+            const msgeDiv = document.getElementById('message');
+            const imageContainer = document.getElementById('imageContainer');
+            
+            msgeDiv.innerHTML = '';
+            imageContainer.innerHTML = '';
+
+            if (isNaN(nImages) || nImages < 1 || nImages % 2 !== 0) {
+                msgeDiv.innerHTML = 'Invalid value';
+                return;
+            }
+
+            const table = document.createElement('table');
+            let row;
+
+            for (let i = 1; i <= nImages; i++) {
+                if (i % 2 !== 0) {
+                    row = table.insertRow();
+                }
+
+                const cell = row.insertCell();
+                
+                cell.innerHTML = createImageTag(`College${i}.jpg`);
+            }
+
+            imageContainer.appendChild(table);
+        }
+
+        function createImageTag(imageSrc) {
+
+            const basePath = "C:\Users\muhidin\Desktop\Test\Collage.jpg";
+            return `<img src="${basePath}${imageSrc}" alt="${imageSrc}" width="200">`;
+        }
+    </script>
+</body>
+</html>
